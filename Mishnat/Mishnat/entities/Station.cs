@@ -2,7 +2,7 @@
 {
     public class Station
     {
-        public string StationId { get; set; }
+        public int StationId { get; set; }
         public string Manager { get; set; }
         public string Name { get; set; }
         public string SellingId { get; set; }

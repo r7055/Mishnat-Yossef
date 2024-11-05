@@ -11,23 +11,23 @@ namespace Mishnat.Controllers
     public class OrderController : ControllerBase
     {
         readonly OrderService _orderService;
-        private object result;
+         
         // GET: api/<OrderController>
         [HttpGet]
         public ActionResult<List<Order>> GetOrders()
         {
-            result = _orderService.GetOrders();
+           var result = _orderService.GetOrders();
             if (result == null) return NotFound();
-            return Ok(result);
+            return result;
         }
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
         public ActionResult<Order> GetOrderById(string id)
         {
-            result = _orderService.GetOrderById(id);
-            if(result==null) result = NotFound();
-            return Ok(result);
+            var result = _orderService.GetOrderById(id);
+            if(result==null) return NotFound();
+            return result;
         }
 
         // POST api/<OrderController>

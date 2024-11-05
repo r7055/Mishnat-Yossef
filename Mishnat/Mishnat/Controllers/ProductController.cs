@@ -11,23 +11,22 @@ namespace Mishnat.Controllers
     public class ProductController : ControllerBase
     {
         readonly ProductService _productService;
-        private object result;
         // GET: api/<ProductController>
         [HttpGet]
         public ActionResult<List<Product>> Get()
         {
-            result = _productService.GetProducts();
+           var result = _productService.GetProducts();
             if (result == null) return NotFound();
-            return Ok(result);
+            return result;
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
         public ActionResult<Product> GetById(string id)
         {
-            result=_productService.GetProductById(id);
+           var result=_productService.GetProductById(id);
             if (result == null) return NotFound();
-            return Ok(result);
+            return result;
         }
 
         // POST api/<ProductController>

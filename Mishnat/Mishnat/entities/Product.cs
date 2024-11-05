@@ -2,7 +2,7 @@
 {
     public class Product
     {
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
         public string Name { get; set; }
         //category
         public string MadeIn { get; set; }

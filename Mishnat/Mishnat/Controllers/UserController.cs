@@ -18,7 +18,7 @@ namespace Mishnat.Controllers
         {
             List<User> users = _userService.GetUsers();
             if(users == null || users.Count == 0) return NotFound();
-            return Ok(users);
+            return users;
         }
 
         // GET api/<UsersController>/5
@@ -27,7 +27,7 @@ namespace Mishnat.Controllers
         {
             User user = _userService.GetUserById(id);
             if(user == null) return NotFound();
-            return Ok(user);
+            return user;
         }
 
         // POST api/<UsersController>

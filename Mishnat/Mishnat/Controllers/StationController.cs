@@ -11,23 +11,22 @@ namespace Mishnat.Controllers
     public class StationController : ControllerBase
     {
         readonly StationService _stationService;
-        private object result;
         // GET: api/<StationController>
         [HttpGet]
         public ActionResult<List<Station>> GetStations()
         {
-            result = _stationService.GetStations();
+            var result = _stationService.GetStations();
             if (result == null) return NotFound();
-            return Ok(result);
+            return result;
         }
 
         // GET api/<StationController>/5
         [HttpGet("{id}")]
         public ActionResult<Station> GetStationById(string stationId)
         {
-            result = _stationService.GetStationById(stationId);
+            var result = _stationService.GetStationById(stationId);
             if (result == null) return NotFound();
-            return Ok(result);
+            return result;
         }
 
         // POST api/<StationController>
