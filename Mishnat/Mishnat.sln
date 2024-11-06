@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mishnat", "Mishnat\Mishnat.csproj", "{1BF62782-52D2-4B1C-8ADF-838467E6EE4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mishnat", "Mishnat\Mishnat.csproj", "{1BF62782-52D2-4B1C-8ADF-838467E6EE4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMishnat", "TestMishnat\TestMishnat.csproj", "{9D9ADC92-56D3-4AFF-9341-E1B84E4C0668}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1BF62782-52D2-4B1C-8ADF-838467E6EE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BF62782-52D2-4B1C-8ADF-838467E6EE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BF62782-52D2-4B1C-8ADF-838467E6EE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D9ADC92-56D3-4AFF-9341-E1B84E4C0668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D9ADC92-56D3-4AFF-9341-E1B84E4C0668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D9ADC92-56D3-4AFF-9341-E1B84E4C0668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D9ADC92-56D3-4AFF-9341-E1B84E4C0668}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

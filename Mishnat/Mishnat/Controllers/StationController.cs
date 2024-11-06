@@ -22,10 +22,13 @@ namespace Mishnat.Controllers
 
         // GET api/<StationController>/5
         [HttpGet("{id}")]
-        public ActionResult<Station> GetStationById(string stationId)
+        public ActionResult<Station> GetStationById(int stationId)
         {
+            if (stationId < 0)
+                return BadRequest();
             var result = _stationService.GetStationById(stationId);
-            if (result == null) return NotFound();
+            if (result == null)
+                return NotFound();
             return result;
         }
 
@@ -38,15 +41,18 @@ namespace Mishnat.Controllers
 
         // PUT api/<StationController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> UpdateStation(string id, [FromBody] Station station)
+        public ActionResult<bool> UpdateStation(int id, [FromBody] Station station)
         {
+            if (id < 0) return BadRequest();
             return _stationService.UpdateStationById(id, station);
         }
 
         // DELETE api/<StationController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteStation(string id)
+        public ActionResult<bool> DeleteStation(int id)
         {
+            if (id < 0)
+                return BadRequest();
             return _stationService.DeleteStation(id);
         }
     }

@@ -1,41 +1,49 @@
 ﻿using Mishnat.DTO;
+using Mishnat.entities;
 using Mishnat.NewFolder;
 
 namespace Mishnat.Service
 {
     public class OrderService
     {
-        public List<Order> Orders { get; set; }
+        
         static int id = 1;
-        public List<Order> GetOrders() { return Orders; }
+        public List<Order> GetOrders()
+        { 
+            return DataContextManager.Manager.Orders; 
+        }
         public Order GetOrderById(int orderId)
         {
-            if (Orders == null) { return null; }
-            return Orders.Where(o => o.OrderId == orderId).FirstOrDefault<Order>();
+            if (DataContextManager.Manager.Orders == null) { return null; }
+            return DataContextManager.Manager.Orders.Where(o => o.OrderId == orderId).FirstOrDefault<Order>();
         }
 
         //update only one fied###
         public bool UpdateOrderById(int orderId, Order order)
         {
-            if (Orders == null) { return false; }
-            Order o = Orders.Find(p => p.OrderId == orderId);
+            if (DataContextManager.Manager.Orders == null) { return false; }
+            Order o = DataContextManager.Manager.Orders.Find(p => p.OrderId == orderId);
             if (o == null) { return false; }
-            o = order;
+            o.DateOrder = order.DateOrder;
+            o.Products = order.Products;
+            o.StationId = order.StationId;
+            o.Payment = order.Payment;
+            o.SellingId = order.SellingId;
             return true;
         }
         public bool AddOrder(Order order)
         {
-            if(Orders == null) { return false; }
+            if(DataContextManager.Manager.Orders == null) { return false; }
             order.OrderId =id++;
-            Orders.Add(order);
+            DataContextManager.Manager.Orders.Add(order);
             return true;
         }
         public bool DeleteOrder(int orderId)
         {
-            if (Orders == null) { return false; }
-            Order o = Orders.Find(o => o.OrderId == orderId);
+            if (DataContextManager.Manager.Orders == null) { return false; }
+            Order o = DataContextManager.Manager.Orders.Find(o => o.OrderId == orderId);
             if (o == null) { return false; }
-            Orders.Remove(o);
+            DataContextManager.Manager.Orders.Remove(o);
             return true;
         }
     }

@@ -17,38 +17,43 @@ namespace Mishnat.Controllers
         public ActionResult<List<User>> GetUsers()
         {
             List<User> users = _userService.GetUsers();
-            if(users == null || users.Count == 0) return NotFound();
+            if(users == null) return new List<User>();
             return users;
         }
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public ActionResult<User> GetById(string id)
+        public ActionResult<User> GetById(int id)
         {
+            if (id < 0)
+                return BadRequest();
             User user = _userService.GetUserById(id);
-            if(user == null) return NotFound();
+            if (user == null)
+                return NotFound();
             return user;
         }
 
         // POST api/<UsersController>
         [HttpPost]
-        public ActionResult<bool> Post([FromBody] User user)
+        public ActionResult<bool> AddUser([FromBody] User user)
         {
            return _userService.AddUser(user);
         }
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(string id, [FromBody] User user)
+        public ActionResult<bool> Update(int id, [FromBody] User user)
         {
             return _userService.UpdateUserById(user, id);
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(string id)
+        public ActionResult<bool> Delete(int id)
         {
-           return _userService.DeleteUser(id);
+            if (id < 0)
+                return BadRequest();
+            return _userService.DeleteUser(id);
         }
     }
 }

@@ -22,9 +22,10 @@ namespace Mishnat.Controllers
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public ActionResult<Product> GetById(string id)
+        public ActionResult<Product> GetById(int id)
         {
-           var result=_productService.GetProductById(id);
+            if (id < 0) return BadRequest();
+            var result =_productService.GetProductById(id);
             if (result == null) return NotFound();
             return result;
         }
@@ -38,15 +39,17 @@ namespace Mishnat.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(string id, [FromBody] Product product)
+        public ActionResult<bool> Put(int id, [FromBody] Product product)
         {
+            if (id < 0) return BadRequest();
             return _productService.UpdateProductById(id, product);
         }
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteProduct(string id)
+        public ActionResult<bool> DeleteProduct(int id)
         {
+            if (id < 0) return BadRequest();
             return _productService.DeleteProduct(id);
         }
     }
