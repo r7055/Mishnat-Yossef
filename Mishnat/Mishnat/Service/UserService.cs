@@ -1,12 +1,15 @@
-﻿using Mishnat.entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using Mishnat.entities;
 using Mishnat.NewFolder;
 
 namespace Mishnat.Service
 {
     public class UserService
     {
-        TzValid TzValid = new TzValid();
-        private static int id = 1;        #region Function
+        TzValid tzValid = new TzValid();
+        ErrorTZ errorTZ = new ErrorTZ();
+        private static int id = 1;        
+        #region Function
         public List<User> GetUsers() { return DataContextManager.Manager.Users; }
         public User GetUserById(int id)
         {
@@ -18,8 +21,8 @@ namespace Mishnat.Service
             if (DataContextManager.Manager.Users == null) { return false; }
             User u = DataContextManager.Manager.Users.Find(u => u.UserId==usteId);
             if (u == null) { return false; }
-            ErrorTZ errorTZ = new ErrorTZ();
-            TzValid.IsOk(user.Tz, out errorTZ);
+
+            tzValid.IsOk(user.Tz, out errorTZ);
             if(errorTZ!=ErrorTZ.OK)
                  return false;
             u.Tz = user.Tz;
@@ -33,7 +36,9 @@ namespace Mishnat.Service
         }
         public bool AddUser(User user)
         {
-            if(DataContextManager.Manager.Users == null) { return false; }
+            if(DataContextManager.Manager.Users ==null) { return false; }
+            tzValid.IsOk(user.Tz, out errorTZ);
+            if(errorTZ!=ErrorTZ.OK) return false;
             user.UserId = id++;
             DataContextManager.Manager.Users.Add(user);
             return true;

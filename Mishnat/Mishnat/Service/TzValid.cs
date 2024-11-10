@@ -12,6 +12,11 @@
         public TzValid() { }
         public bool IsOk(string idTZ, out ErrorTZ error)
         {
+            if (idTZ == null)
+            {
+                error = ErrorTZ.LanghtNotValid;
+                return false;
+            }
             if (idTZ.Length != 9)
             {
                 error = ErrorTZ.LanghtNotValid;
