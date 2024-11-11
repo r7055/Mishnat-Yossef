@@ -10,7 +10,7 @@ namespace Mishnat.Controllers
     [ApiController]
     public class StationController : ControllerBase
     {
-        readonly StationService _stationService;
+        readonly StationService _stationService=new StationService();
         // GET: api/<StationController>
         [HttpGet]
         public ActionResult<List<Station>> GetStations()

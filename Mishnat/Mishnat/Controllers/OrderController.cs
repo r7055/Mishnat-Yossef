@@ -10,7 +10,7 @@ namespace Mishnat.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        readonly OrderService _orderService;
+        readonly OrderService _orderService= new OrderService();
         // GET: api/<OrderController>
         [HttpGet]
         public ActionResult<List<Order>> GetOrders()
@@ -42,9 +42,10 @@ namespace Mishnat.Controllers
         [HttpPut("{id}")]
         public ActionResult<bool> UpdateOrder(int id, [FromBody] Order order)
         {
-
             if(id < 0) return BadRequest();
-            return _orderService.UpdateOrderById(id, order);
+            bool res=_orderService.UpdateOrderById(id, order);
+            if(!res) return NotFound(false);
+            return true;
         }
 
         // DELETE api/<OrderController>/5
@@ -52,7 +53,9 @@ namespace Mishnat.Controllers
         public ActionResult<bool> DeleteOrder(int id)
         {
             if (id < 0) return BadRequest();
-            return _orderService.DeleteOrder(id);
+            bool res= _orderService.DeleteOrder(id);
+            if(res==false) return NotFound(false);
+            return true;
         }
     }
 }

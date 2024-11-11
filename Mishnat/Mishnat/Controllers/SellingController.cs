@@ -10,7 +10,7 @@ namespace Mishnat.Controllers
     [ApiController]
     public class SellingController : ControllerBase
     {
-        readonly SellingService _sellingService;
+        readonly SellingService _sellingService= new  SellingService();
         // GET: api/<SellingController>
         [HttpGet]
         public ActionResult<List<Selling>> GetSellings()

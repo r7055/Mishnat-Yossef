@@ -25,7 +25,6 @@ namespace Mishnat.Service
             Order o = DataContextManager.Manager.Orders.Find(p => p.OrderId == orderId);
             if (o == null) { return false; }
             o.DateOrder = order.DateOrder;
-            o.Products = order.Products;
             o.StationId = order.StationId;
             o.Payment = order.Payment;
             o.SellingId = order.SellingId;

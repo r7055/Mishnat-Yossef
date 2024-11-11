@@ -8,7 +8,7 @@
         public string Email { get; set; }
         public string  Phon { get; set; }
         public string Address { get; set; }
-        public string StationId { get; set; }
+        public int StationId { get; set; }
         public DateOnly DateOfRegistration { get; set; }
     }
 }

@@ -21,9 +21,10 @@ namespace TestMishnat
             //Act
             var controller = new UserController();
             var result = controller.GetById(id);
+            Assert.IsType<User>(result);
+           
 
-            
-            Assert.True(result is User || result == null);
+            //Assert.True(result is User || result == null);
             // Assert
             //if (result != null)
             //{
@@ -31,7 +32,7 @@ namespace TestMishnat
             //}
             //else
             //{
-            //    Assert.Null(result);
+            //   Assert.Null(result);
             //}
 
         }
