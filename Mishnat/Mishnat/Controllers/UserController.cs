@@ -10,7 +10,12 @@ namespace Mishnat.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        readonly UserService _userService= new UserService();
+        readonly UserService _userService;
+
+        public UserController(UserService userService)
+        {
+            _userService = userService;
+        }
 
         // GET: api/<UsersController>
         [HttpGet]

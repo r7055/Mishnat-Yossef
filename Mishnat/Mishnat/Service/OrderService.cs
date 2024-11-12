@@ -10,19 +10,19 @@ namespace Mishnat.Service
         static int id = 1;
         public List<Order> GetOrders()
         { 
-            return DataContextManager.Manager.Orders; 
+            return DataContext.Orders; 
         }
         public Order GetOrderById(int orderId)
         {
-            if (DataContextManager.Manager.Orders == null) { return null; }
-            return DataContextManager.Manager.Orders.Where(o => o.OrderId == orderId).FirstOrDefault<Order>();
+            if (DataContext.Orders == null) { return null; }
+            return DataContext.Orders.Where(o => o.OrderId == orderId).FirstOrDefault<Order>();
         }
 
         //update only one fied###
         public bool UpdateOrderById(int orderId, Order order)
         {
-            if (DataContextManager.Manager.Orders == null) { return false; }
-            Order o = DataContextManager.Manager.Orders.Find(p => p.OrderId == orderId);
+            if (DataContext.Orders == null) { return false; }
+            Order o = DataContext.Orders.Find(p => p.OrderId == orderId);
             if (o == null) { return false; }
             o.DateOrder = order.DateOrder;
             o.StationId = order.StationId;
@@ -32,17 +32,17 @@ namespace Mishnat.Service
         }
         public bool AddOrder(Order order)
         {
-            if(DataContextManager.Manager.Orders == null) { return false; }
+            if(DataContext.Orders == null) { return false; }
             order.OrderId =id++;
-            DataContextManager.Manager.Orders.Add(order);
+            DataContext.Orders.Add(order);
             return true;
         }
         public bool DeleteOrder(int orderId)
         {
-            if (DataContextManager.Manager.Orders == null) { return false; }
-            Order o = DataContextManager.Manager.Orders.Find(o => o.OrderId == orderId);
+            if (DataContext.Orders == null) { return false; }
+            Order o = DataContext.Orders.Find(o => o.OrderId == orderId);
             if (o == null) { return false; }
-            DataContextManager.Manager.Orders.Remove(o);
+            DataContext.Orders.Remove(o);
             return true;
         }
     }

@@ -8,18 +8,28 @@ namespace Mishnat.Service
     {
         TzValid tzValid = new TzValid();
         ErrorTZ errorTZ = new ErrorTZ();
+        readonly IDataContext _dataContext;
+
+        public UserService(IDataContext dataContext)
+        {
+            this._dataContext = dataContext;
+        }
+
         private static int id = 1;        
         #region Function
-        public List<User> GetUsers() { return DataContextManager.Manager.Users; }
+        public List<User> GetUsers() { return _dataContext.LoudUsers(); }
         public User GetUserById(int id)
         {
-            if (DataContextManager.Manager.Users == null) { return null; }
-            return DataContextManager.Manager.Users.Where(u => u.UserId==id).FirstOrDefault<User>();
+            var users= _dataContext.LoudUsers();
+            if (users == null) { return null; }
+            return users.Where(u => u.UserId==id).FirstOrDefault<User>();
         }
         public bool UpdateUserById(User user, int usteId)
         {
-            if (DataContextManager.Manager.Users == null) { return false; }
-            User u = DataContextManager.Manager.Users.Find(u => u.UserId==usteId);
+            var users = _dataContext.LoudUsers();
+            if (users == null) { return false; }
+
+            User u =users.Find(u => u.UserId==usteId);
             if (u == null) { return false; }
 
             tzValid.IsOk(user.Tz, out errorTZ);
@@ -32,27 +42,40 @@ namespace Mishnat.Service
             u.Email=user.Email;
             u.Name = user.Name;
             u.Phon=user.Phon;
-            return true;
+            if(_dataContext.SaveUsers(users))
+                return true;
+            return false;
         }
         public bool AddUser(User user)
         {
-            if(DataContextManager.Manager.Users ==null) { return false; }
+            var users = _dataContext.LoudUsers();
+            if (users ==null) { return false; }
+
+            if (users.Exists(u => u.Tz.Equals(user.Tz))) { return false; }
+
             tzValid.IsOk(user.Tz, out errorTZ);
             if(errorTZ!=ErrorTZ.OK) return false;
-            user.UserId = id++;
-            DataContextManager.Manager.Users.Add(user);
-            return true;
+
+            
+            users.Add(user);
+            if(_dataContext.SaveUsers(users))
+                 return true;
+            return false;
         }
         public bool DeleteUser(int id)
         {
-            if(DataContextManager.Manager.Users == null) { return false; }
-            User delUser = DataContextManager.Manager.Users.Find(u => u.UserId == id);
+            var users = _dataContext.LoudUsers();
+
+            if (users == null) { return false; }
+            User delUser = users.Find(u => u.UserId == id);
             if (delUser == null)
             {
                 return false;
             }
-            DataContextManager.Manager.Users.Remove(delUser);
-            return true;
+            users.Remove(delUser);
+            if (_dataContext.SaveUsers(users))
+                return true;
+            return false;
         }
         #endregion
     }

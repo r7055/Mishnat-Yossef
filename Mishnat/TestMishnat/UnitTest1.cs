@@ -19,7 +19,7 @@ namespace TestMishnat
             var id = 112;
 
             //Act
-            var controller = new UserController();
+            var controller = new UserController(new UserService(new FakeConetxt()));
             var result = controller.GetById(id);
             Assert.IsType<User>(result);
            
@@ -41,7 +41,7 @@ namespace TestMishnat
         [Fact]
         public void GetAll_ReturnsCount()
         {
-            var controller = new UserController();
+            var controller = new UserController(new UserService(new FakeConetxt()));
             var result = controller.GetUsers();
             Assert.Equal(0,result.Value.Count);
         }
@@ -49,7 +49,7 @@ namespace TestMishnat
         public void AddUser_ReturnFalse()
         {
             var user = new User();
-            var controller = new UserController();
+            var controller = new UserController(new UserService(new FakeConetxt()));
             var res=controller.AddUser(user);
             Assert.True(!res.Value);
         }
@@ -57,7 +57,7 @@ namespace TestMishnat
         public void UpdateUser_ReturnTrue()
         {
             var user = new User();
-            var controller = new UserController();
+            var controller = new UserController(new UserService(new FakeConetxt()));
             var resUser = controller.AddUser(user);
             var resUsers= controller.GetUsers();
             Assert.True(resUsers.Value.Count == controller.GetUsers().Value.Count&& !resUser.Value);
@@ -67,7 +67,7 @@ namespace TestMishnat
         public void DeleteUser_ReturnFalse()
         {
             var id = -1;
-            var controller = new UserController();
+            var controller = new UserController(new UserService(new FakeConetxt()));
             var res = controller.Delete(id);
             Assert.True(!res.Value);
         }

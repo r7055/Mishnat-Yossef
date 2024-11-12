@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mishnat;
 using Mishnat.DTO;
 using Mishnat.NewFolder;
-using System.Drawing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 
-namespace Mishnat.entities
+namespace TestMishnat
 {
-    public class DataContext:IDataContext
+    internal class FakeConetxt : IDataContext
     {
-
-        public static List<Order>  Orders { get; set; } = new List<Order>();
+        public static List<Order> Orders { get; set; } = new List<Order>();
         public static List<Product> Products { get; set; } = new List<Product>();
         public static List<Selling> Sellings { get; set; } = new List<Selling>();
         public static List<Station> Stations { get; set; } = new List<Station>();
-       // public  List<User> Users { get; set; } = new List<User>();
-
         public List<Order> LoudOrders()
         {
             throw new NotImplementedException();
