@@ -11,30 +11,37 @@ namespace Mishnat_Yossef.Data.Repository
 {
     internal class OrderRepository : IRepository<Order>
     {
-
-        public bool Add(Order repository)
+        readonly IdataContext _idataContext;
+        public bool Add(Order order)
         {
-            throw new NotImplementedException();
+            _idataContext.Orders.Add(order);
+            return _idataContext.SaveDada(_idataContext.Orders);
         }
-
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            return _idataContext.Orders.Remove(_idataContext.Orders.Find(o => o.OrderId == id)) &&
+                 _idataContext.SaveDada(_idataContext.Orders);
         }
-
         public Order Get(string id)
         {
-            throw new NotImplementedException();
+            return _idataContext.Orders.Find(o => o.OrderId == id);
         }
-
         public List<Order> GetAll()
         {
-            throw new NotImplementedException();
+            return _idataContext.Orders;
         }
-
-        public bool Update(string id, Order repository)
+        public bool Update(string id, Order order)
         {
-            throw new NotImplementedException();
+           Order o=_idataContext.Orders.Find(o=>o.OrderId == id);
+            if (o != null)
+            {
+                o.DateOrder = order.DateOrder;
+                o.StationId = order.StationId;
+                o.Payment = order.Payment;
+                o.SellingId = order.SellingId;
+                return _idataContext.SaveDada(_idataContext.Orders);
+            }
+            return false;
         }
     }
 }

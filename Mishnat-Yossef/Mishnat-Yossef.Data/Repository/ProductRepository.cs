@@ -10,29 +10,37 @@ namespace Mishnat_Yossef.Data.Repository
 {
     internal class ProductRepository : IRepository<Product>
     {
-        public bool Add(Product repository)
+        readonly IdataContext _idataContext;
+        public bool Add(Product product)
         {
-            throw new NotImplementedException();
+           _idataContext.Products.Add(product);
+            return _idataContext.SaveDada(_idataContext.Products);
         }
-
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            return _idataContext.Products.Remove(_idataContext.Products.First(p => p.ProductId == id)) &&
+                _idataContext.SaveDada(_idataContext.Products);
         }
-
         public Product Get(string id)
         {
-            throw new NotImplementedException();
+            return _idataContext.Products.Find(p => p.ProductId == id);
         }
-
         public List<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _idataContext.Products;
         }
-
-        public bool Update(string id, Product repository)
+        public bool Update(string id, Product product)
         {
-            throw new NotImplementedException();
+           Product p=_idataContext.Products.Find(p=>p.ProductId == id);
+            if (p != null)
+            {
+                p.DateOfLastUpdate = product.DateOfLastUpdate;
+                p.Qty = product.Qty;
+                p.Price = product.Price;
+                p.Name = product.Name;
+                return _idataContext.SaveDada(_idataContext.Products);
+            }
+            return false;
         }
     }
 }

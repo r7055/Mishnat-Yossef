@@ -12,29 +12,35 @@ namespace Mishnat_Yossef.Data.Repository
     internal class SellingRepositoty : IRepository<Selling>
     {
         readonly IdataContext _dataContext;
-        public bool Add(Selling repository)
+        public bool Add(Selling selling)
         {
-            throw new NotImplementedException();
+            _dataContext.Sellings.Add(selling);
+            return _dataContext.SaveDada(_dataContext.Sellings);
         }
-
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            return _dataContext.Sellings.Remove(_dataContext.Sellings.Find(s => s.SellingId == id)) &&
+                _dataContext.SaveDada(_dataContext.Sellings);
         }
-
         public Selling Get(string id)
         {
-            throw new NotImplementedException();
+            return _dataContext.Sellings.Find(s => s.SellingId == id);
         }
-
         public List<Selling> GetAll()
         {
-            throw new NotImplementedException();
+            return _dataContext.Sellings;
         }
-
-        public bool Update(string id, Selling repository)
+        public bool Update(string id, Selling selling)
         {
-            throw new NotImplementedException();
+            Selling s=_dataContext.Sellings.Find(s=>s.SellingId==id);
+            if (s!=null)
+            {
+                s.Parasha = selling.Parasha;
+                s.Products = selling.Products;
+                s.Date = s.Date;
+                return _dataContext.SaveDada(_dataContext.Sellings);
+            }
+            return false;
         }
     }
 }

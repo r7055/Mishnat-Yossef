@@ -21,8 +21,8 @@ namespace Mishnat_Yossef.Data.Repository
         }
         public bool Delete(string id)
         {
-            _idataContext.Stations.Remove(_idataContext.Stations.Find(s=>s.StationId == id));
-            return _idataContext.SaveDada(_idataContext.Stations);
+           return _idataContext.Stations.Remove(_idataContext.Stations.Find(s=>s.StationId == id))&&
+           _idataContext.SaveDada(_idataContext.Stations);
         }
         public Station Get(string id)
         {

@@ -19,8 +19,8 @@ namespace Mishnat_Yossef.Data.Repository
         }
         public bool Delete(string id)
         {
-            _idataContext.Users.Remove(_idataContext.Users.Find((user)=>user.UserId==id));
-           return _idataContext.SaveDada(_idataContext.Users);
+            return _idataContext.Users.Remove(_idataContext.Users.Find((user)=>user.UserId==id))&&
+            _idataContext.SaveDada(_idataContext.Users);
         }
         public User Get(string id)
         {
