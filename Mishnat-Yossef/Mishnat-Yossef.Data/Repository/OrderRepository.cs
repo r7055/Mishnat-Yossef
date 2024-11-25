@@ -12,6 +12,10 @@ namespace Mishnat_Yossef.Data.Repository
     internal class OrderRepository : IRepository<Order>
     {
         readonly IdataContext _idataContext;
+        public OrderRepository(IdataContext idataContext)
+        {
+            _idataContext = idataContext;
+        }
         public bool Add(Order order)
         {
             _idataContext.Orders.Add(order);

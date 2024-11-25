@@ -14,6 +14,10 @@ namespace Mishnat_Yossef.Data.Repository
     internal class StationRepositoryj : IRepository<Station>
     {
         readonly IdataContext _idataContext;
+        public StationRepositoryj(IdataContext idataContext)
+        {
+            _idataContext = idataContext;
+        }
         public bool Add(Station station)
         {
             _idataContext.Stations.Add(station);

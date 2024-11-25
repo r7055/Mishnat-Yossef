@@ -10,7 +10,7 @@ namespace Mishnat_Yossef.Core.InterfaceService
     public interface ISellingService
     {
         public List<Selling> GetAll();
-        public User Get(string id);
+        public Selling Get(string id);
         public bool Add(Selling selling);
         public bool Update(string id, Selling selling);
         public bool Delete(string id);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceService;
 
 namespace Mishnat_Yossef.Api.Controllers
 {
@@ -8,22 +9,26 @@ namespace Mishnat_Yossef.Api.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        readonly OrderService _orderService = new OrderService();
+        readonly IOrderService _orderService;
+        public OrderController(IOrderService orderService)
+        {
+            _orderService = orderService;
+        }
         // GET: api/<OrderController>
         [HttpGet]
         public ActionResult<List<Order>> GetOrders()
         {
-            var result = _orderService.GetOrders();
+            var result = _orderService.GetAll();
             if (result == null) return NotFound();
             return result;
         }
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
-        public ActionResult<Order> GetOrderById(int id)
+        public ActionResult<Order> GetOrderById(string id)
         {
-            if (id < 0) return BadRequest();
-            var result = _orderService.GetOrderById(id);
+            if (id == null) return BadRequest();
+            var result = _orderService.Get(id);
             if (result == null) return NotFound();
             return result;
         }
@@ -33,25 +38,25 @@ namespace Mishnat_Yossef.Api.Controllers
         public ActionResult<bool> AddOrder([FromBody] Order order)
         {
             if (order == null) return BadRequest();
-            return _orderService.AddOrder(order);
+            return _orderService.Add(order);
         }
 
         // PUT api/<OrderController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> UpdateOrder(int id, [FromBody] Order order)
+        public ActionResult<bool> UpdateOrder(string id, [FromBody] Order order)
         {
-            if (id < 0) return BadRequest();
-            bool res = _orderService.UpdateOrderById(id, order);
+            if (id == null) return BadRequest();
+            bool res = _orderService.Update(id, order);
             if (!res) return NotFound(false);
             return true;
         }
 
         // DELETE api/<OrderController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteOrder(int id)
+        public ActionResult<bool> DeleteOrder(string id)
         {
-            if (id < 0) return BadRequest();
-            bool res = _orderService.DeleteOrder(id);
+            if (id == null) return BadRequest();
+            bool res = _orderService.Delete(id);
             if (res == false) return NotFound(false);
             return true;
         }

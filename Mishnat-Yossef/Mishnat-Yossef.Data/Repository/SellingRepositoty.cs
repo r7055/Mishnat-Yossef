@@ -12,6 +12,10 @@ namespace Mishnat_Yossef.Data.Repository
     internal class SellingRepositoty : IRepository<Selling>
     {
         readonly IdataContext _dataContext;
+        public SellingRepositoty(IdataContext idataContext)
+        {
+            _dataContext = idataContext;
+        }
         public bool Add(Selling selling)
         {
             _dataContext.Sellings.Add(selling);

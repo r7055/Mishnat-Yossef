@@ -1,4 +1,5 @@
 ﻿using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceRepository;
 using Mishnat_Yossef.Core.InterfaceService;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,39 @@ namespace MIshnat_Yossef.Service.Service
 {
     internal class StationServicse : IStationService
     {
+        readonly IRepository<Station> _stationRepository;
+        public StationServicse(IRepository<Station> repository)
+        {
+            _stationRepository = repository;
+        }
         public bool Add(Station station)
         {
-            throw new NotImplementedException();
+            if (station == null) { return false; }
+            return _stationRepository.Add(station);
         }
 
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            return _stationRepository.Delete(id);
         }
 
-        public User Get(string id)
+        public Station Get(string id)
         {
-            throw new NotImplementedException();
+            return _stationRepository.Get(id); 
         }
 
         public List<Station> GetAll()
         {
-            throw new NotImplementedException();
+           if(_stationRepository.GetAll() == null) { return new List<Station>(); }
+           return _stationRepository.GetAll();
         }
 
         public bool Update(string id, Station station)
         {
-            throw new NotImplementedException();
+           if(station  == null) { return false; }   
+           return _stationRepository.Update(id, station);
         }
+
+        
     }
 }

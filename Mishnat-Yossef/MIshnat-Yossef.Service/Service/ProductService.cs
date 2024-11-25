@@ -1,4 +1,5 @@
 ﻿using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceRepository;
 using Mishnat_Yossef.Core.InterfaceService;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,35 @@ namespace MIshnat_Yossef.Service.Service
 {
     internal class ProductService : IProductService
     {
+        readonly IRepository<Product> _productRepository;
+        public ProductService(IRepository<Product> repository)
+        {
+            _productRepository = repository;
+        }
         public bool Add(Product product)
         {
-            throw new NotImplementedException();
+           if (product == null) { return false; }
+           return _productRepository.Add(product);
         }
 
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            return _productRepository.Delete(id);
         }
 
         public Product Get(string id)
         {
-            throw new NotImplementedException();
+           return _productRepository.Get(id);
         }
 
         public List<Product> GetAll()
         {
-            throw new NotImplementedException();
+           return _productRepository.GetAll();
         }
 
         public bool Update(string id, Product product)
         {
-            throw new NotImplementedException();
+           return _productRepository.Update(id, product);
         }
     }
 }

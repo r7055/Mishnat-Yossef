@@ -12,6 +12,10 @@ namespace Mishnat_Yossef.Data.Repository
     public class UserRepository : IRepository<User>
     {
         readonly IdataContext _idataContext;
+        public UserRepository(IdataContext _idataContext)
+        {
+            _idataContext = _idataContext;
+        }
         public bool Add(User user)
         {
            _idataContext.Users.Add(user);

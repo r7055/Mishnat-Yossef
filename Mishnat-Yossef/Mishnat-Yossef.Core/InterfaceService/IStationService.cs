@@ -10,7 +10,7 @@ namespace Mishnat_Yossef.Core.InterfaceService
     public interface IStationService
     {
         public List<Station> GetAll();
-        public User Get(string id);
+        public Station Get(string id);
         public bool Add(Station station);
         public bool Update(string id, Station   station);
         public bool Delete(string id);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceService;
 
 namespace Mishnat_Yossef.Api.Controllers
 {
@@ -8,23 +9,27 @@ namespace Mishnat_Yossef.Api.Controllers
     [ApiController]
     public class StationController : ControllerBase
     {
-        readonly StationService _stationService = new StationService();
+        readonly IStationService _stationService;
+        public StationController(IStationService stationService)
+        {
+            _stationService = stationService;
+        }
         // GET: api/<StationController>
         [HttpGet]
         public ActionResult<List<Station>> GetStations()
         {
-            var result = _stationService.GetStations();
+            var result = _stationService.GetAll();
             if (result == null) return NotFound();
             return result;
         }
 
         // GET api/<StationController>/5
         [HttpGet("{id}")]
-        public ActionResult<Station> GetStationById(int stationId)
+        public ActionResult<Station> GetStationById(string stationId)
         {
-            if (stationId < 0)
+            if (stationId == null)
                 return BadRequest();
-            var result = _stationService.GetStationById(stationId);
+            var result = _stationService.Get(stationId);
             if (result == null)
                 return NotFound();
             return result;
@@ -34,24 +39,24 @@ namespace Mishnat_Yossef.Api.Controllers
         [HttpPost]
         public ActionResult<bool> AddStation([FromBody] Station station)
         {
-            return _stationService.AddStation(station);
+            return _stationService.Add(station);
         }
 
         // PUT api/<StationController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> UpdateStation(int id, [FromBody] Station station)
+        public ActionResult<bool> UpdateStation(string id, [FromBody] Station station)
         {
-            if (id < 0) return BadRequest();
-            return _stationService.UpdateStationById(id, station);
+            if (id == null) return BadRequest();
+            return _stationService.Update(id, station);
         }
 
         // DELETE api/<StationController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteStation(int id)
+        public ActionResult<bool> DeleteStation(string id)
         {
-            if (id < 0)
+            if (id == null)
                 return BadRequest();
-            return _stationService.DeleteStation(id);
+            return _stationService.Delete(id);
         }
     }
 }

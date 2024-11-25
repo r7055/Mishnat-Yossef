@@ -1,4 +1,5 @@
 ﻿using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceRepository;
 using Mishnat_Yossef.Core.InterfaceService;
 using System;
 using System.Collections.Generic;
@@ -10,31 +11,37 @@ namespace MIshnat_Yossef.Service.Service
 {
     internal class OrderServicse : IOrderService
     {
-        readonly IReposito
+        readonly IRepository<Order> _OrderRepository;
+        public OrderServicse(IRepository<Order> repository)
+        {
+            _OrderRepository = repository;
+        }
 
         public bool Add(Order order)
         {
-            throw new NotImplementedException();
+           if(order == null) { return false; } 
+           return _OrderRepository.Add(order);
         }
 
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            if(id==null) { return false; }
+            return _OrderRepository.Delete(id);
         }
 
         public Order Get(string id)
         {
-            throw new NotImplementedException();
+            return _OrderRepository.Get(id);
         }
 
         public List<Order> GetAll()
         {
-            throw new NotImplementedException();
+            return _OrderRepository.GetAll();
         }
 
         public bool Update(string id, Order order)
         {
-            throw new NotImplementedException();
+           return _OrderRepository.Update(id, order);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceService;
 
 namespace Mishnat_Yossef.Api.Controllers
 {
@@ -8,22 +9,26 @@ namespace Mishnat_Yossef.Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        readonly ProductService _productService = new ProductService();
+        readonly IProductService _productService;
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
         // GET: api/<ProductController>
         [HttpGet]
         public ActionResult<List<Product>> Get()
         {
-            var result = _productService.GetProducts();
+            var result = _productService.GetAll();
             if (result == null) return NotFound();
             return result;
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public ActionResult<Product> GetById(int id)
+        public ActionResult<Product> GetById(string id)
         {
-            if (id < 0) return BadRequest();
-            var result = _productService.GetProductById(id);
+            if (id == null) return BadRequest();
+            var result = _productService.Get(id);
             if (result == null) return NotFound();
             return result;
         }
@@ -32,23 +37,24 @@ namespace Mishnat_Yossef.Api.Controllers
         [HttpPost]
         public ActionResult<bool> Post([FromBody] Product product)
         {
-            return _productService.AddProduct(product);
+            if (product == null) return BadRequest();
+            return _productService.Add(product);
         }
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(int id, [FromBody] Product product)
+        public ActionResult<bool> Put(string id, [FromBody] Product product)
         {
-            if (id < 0) return BadRequest();
-            return _productService.UpdateProductById(id, product);
+            if (id == null) return BadRequest();
+            return _productService.Update(id, product);
         }
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteProduct(int id)
+        public ActionResult<bool> DeleteProduct(string id)
         {
-            if (id < 0) return BadRequest();
-            return _productService.DeleteProduct(id);
+            if (id == null) return BadRequest();
+            return _productService.Delete(id);
         }
     }
 }

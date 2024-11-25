@@ -12,30 +12,33 @@ namespace MIshnat_Yossef.Service.Service
 {
     internal class UserServicse : IUserService
     {
-        readonly IRepository<IUserService> _userRepository;
+        readonly IRepository<User> _userRepository;
         public bool Add(User user)
         {
-            _userRepository.Add(user);
+            if (user == null) { return false; }
+           return _userRepository.Add(user);
         }
 
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+           if(id == null) { return false; }
+           return _userRepository.Delete(id);
         }
 
         public User Get(string id)
         {
-            throw new NotImplementedException();
+            return _userRepository.Get(id);
         }
 
         public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAll();
         }
 
         public bool Update(string id, User user)
         {
-            throw new NotImplementedException();
+           if(user == null) { return false; }
+           return (_userRepository.Update(id, user));
         }
     }
 

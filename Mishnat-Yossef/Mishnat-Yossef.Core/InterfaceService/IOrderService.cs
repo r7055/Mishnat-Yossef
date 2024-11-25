@@ -1,4 +1,5 @@
 ﻿using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

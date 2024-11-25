@@ -11,6 +11,10 @@ namespace Mishnat_Yossef.Data.Repository
     internal class ProductRepository : IRepository<Product>
     {
         readonly IdataContext _idataContext;
+        public ProductRepository(IdataContext idataContext)
+        {
+            _idataContext = idataContext;
+        }
         public bool Add(Product product)
         {
            _idataContext.Products.Add(product);

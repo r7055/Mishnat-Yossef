@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceService;
 
 namespace Mishnat_Yossef.Api.Controllers
 {
@@ -8,9 +9,9 @@ namespace Mishnat_Yossef.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        readonly UserService _userService;
+        readonly IUserService _userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -19,18 +20,18 @@ namespace Mishnat_Yossef.Api.Controllers
         [HttpGet]
         public ActionResult<List<User>> GetUsers()
         {
-            List<User> users = _userService.GetUsers();
+            List<User> users = _userService.GetAll();
             if (users == null) return new List<User>();
             return users;
         }
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public ActionResult<User> GetById(int id)
+        public ActionResult<User> GetById(string id)
         {
-            if (id < 0)
+            if (id == null)
                 return BadRequest();
-            User user = _userService.GetUserById(id);
+            User user = _userService.Get(id);
             if (user == null)
                 return NotFound();
             return user;
@@ -40,23 +41,25 @@ namespace Mishnat_Yossef.Api.Controllers
         [HttpPost]
         public ActionResult<bool> AddUser([FromBody] User user)
         {
-            return _userService.AddUser(user);
+            if (user == null) return BadRequest();
+            return _userService.Add(user);
         }
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Update(int id, [FromBody] User user)
+        public ActionResult<bool> Update(string id, [FromBody] User user)
         {
-            return _userService.UpdateUserById(user, id);
+            if (user == null||id==null) return BadRequest();
+            return _userService.Update(id,user);
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(int id)
+        public ActionResult<bool> Delete(string id)
         {
-            if (id < 0)
+            if (id == null)
                 return BadRequest();
-            return _userService.DeleteUser(id);
+            return _userService.Delete(id);
         }
     }
 }

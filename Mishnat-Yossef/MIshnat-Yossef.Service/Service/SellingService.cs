@@ -1,4 +1,5 @@
 ﻿using Mishnat_Yossef.Core.Entities;
+using Mishnat_Yossef.Core.InterfaceRepository;
 using Mishnat_Yossef.Core.InterfaceService;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,37 @@ namespace MIshnat_Yossef.Service.Service
 {
     internal class SellingServicse : ISellingService
     {
+        readonly IRepository<Selling> _SellingRepository;
+        public SellingServicse(IRepository<Selling> repository)
+        {
+            _SellingRepository = repository;
+        }
         public bool Add(Selling selling)
         {
-            throw new NotImplementedException();
+           if (selling == null) { return false; }
+           return _SellingRepository.Add(selling);
         }
 
         public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            if (id == null) return false;
+            return _SellingRepository.Delete(id);
         }
 
-        public User Get(string id)
+        public Selling Get(string id)
         {
-            throw new NotImplementedException();
+            return _SellingRepository.Get(id);
         }
 
         public List<Selling> GetAll()
         {
-            throw new NotImplementedException();
+            return _SellingRepository.GetAll();
         }
 
         public bool Update(string id, Selling selling)
         {
-            throw new NotImplementedException();
+           if(id == null) return false;
+           return _SellingRepository.Update(id, selling);
         }
     }
 }
