@@ -11,8 +11,4 @@
     <ProjectReference Include="..\Mishnat-Yossef.Core\Mishnat-Yossef.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="FileJSON\" />
-  </ItemGroup>
-
 </Project>

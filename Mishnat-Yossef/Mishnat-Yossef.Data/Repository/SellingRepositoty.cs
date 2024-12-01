@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mishnat_Yossef.Data.Repository
 {
-    internal class SellingRepositoty : IRepository<Selling>
+    public class SellingRepositoty : IRepository<Selling>
     {
         readonly IdataContext _dataContext;
         public SellingRepositoty(IdataContext idataContext)

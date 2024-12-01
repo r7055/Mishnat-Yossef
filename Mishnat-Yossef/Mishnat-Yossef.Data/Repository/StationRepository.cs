@@ -11,10 +11,10 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace Mishnat_Yossef.Data.Repository
 {
-    internal class StationRepositoryj : IRepository<Station>
+    public class StationRepository : IRepository<Station>
     {
         readonly IdataContext _idataContext;
-        public StationRepositoryj(IdataContext idataContext)
+        public StationRepository(IdataContext idataContext)
         {
             _idataContext = idataContext;
         }

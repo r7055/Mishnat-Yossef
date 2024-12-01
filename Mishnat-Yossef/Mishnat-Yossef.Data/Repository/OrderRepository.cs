@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Mishnat_Yossef.Data.Repository
 {
-    internal class OrderRepository : IRepository<Order>
+    public class OrderRepository : IRepository<Order>
     {
         readonly IdataContext _idataContext;
         public OrderRepository(IdataContext idataContext)

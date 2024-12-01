@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mishnat-Yossef.Core\Mishnat-Yossef.Core.csproj" />
+    <ProjectReference Include="..\Mishnat-Yossef.Data\Mishnat-Yossef.Data.csproj" />
+    <ProjectReference Include="..\MIshnat-Yossef.Service\MIshnat-Yossef.Service.csproj" />
   </ItemGroup>
 
 </Project>

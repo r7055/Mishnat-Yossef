@@ -13,14 +13,15 @@ namespace Mishnat_Yossef.Data
         public List<User> Users { get; set; }
         public DataContext()
         {
+            Users=LoadData<User>();
             Orders=LoadData<Order>();
             Products=LoadData<Product>();
             Sellings=LoadData<Selling>();
             Stations=LoadData<Station>();
-            Users=LoadData<User>();
         }
         public List<T> LoadData<T>()
         {
+            
             string path = GetPath<T>();
             string dataJson = File.ReadAllText(path);
             var allData = JsonSerializer.Deserialize<List<T>>(dataJson);
@@ -48,7 +49,11 @@ namespace Mishnat_Yossef.Data
         }
         private string GetPath<T>()
         {
-            return Path.Combine(AppContext.BaseDirectory,"FileJSON", $"{typeof(T).Name}.json");
+            string dir = "\\Mishnat-Yossef\\Mishnat-Yossef\\";
+            string s=AppContext.BaseDirectory;
+            int x = s.IndexOf(dir);
+            string path = AppContext.BaseDirectory.Substring(0,x+ dir.Length);
+            return Path.Combine(path, "Mishnat-Yossef.Data\\FileJSON", $"{typeof(T).Name}.json");
         }
     }
 }

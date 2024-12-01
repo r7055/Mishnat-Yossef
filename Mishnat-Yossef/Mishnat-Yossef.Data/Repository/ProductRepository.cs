@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mishnat_Yossef.Data.Repository
 {
-    internal class ProductRepository : IRepository<Product>
+    public class ProductRepository : IRepository<Product>
     {
         readonly IdataContext _idataContext;
         public ProductRepository(IdataContext idataContext)

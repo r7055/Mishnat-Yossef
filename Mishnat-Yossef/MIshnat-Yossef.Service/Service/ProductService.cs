@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MIshnat_Yossef.Service.Service
 {
-    internal class ProductService : IProductService
+    public class ProductService : IProductService
     {
         readonly IRepository<Product> _productRepository;
         public ProductService(IRepository<Product> repository)

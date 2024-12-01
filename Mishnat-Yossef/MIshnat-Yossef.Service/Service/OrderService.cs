@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace MIshnat_Yossef.Service.Service
 {
-    internal class OrderServicse : IOrderService
+    public class OrderService : IOrderService
     {
         readonly IRepository<Order> _OrderRepository;
-        public OrderServicse(IRepository<Order> repository)
+        public OrderService(IRepository<Order> repository)
         {
             _OrderRepository = repository;
         }

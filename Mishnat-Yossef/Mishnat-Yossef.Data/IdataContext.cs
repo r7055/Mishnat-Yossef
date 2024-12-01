@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mishnat_Yossef.Data
 {
-    internal interface IdataContext
+    public interface IdataContext
     {
         public List<Order> Orders { get; set; }
         public List<Product> Products { get; set; }

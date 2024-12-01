@@ -10,9 +10,13 @@ using System.Threading.Tasks;
 
 namespace MIshnat_Yossef.Service.Service
 {
-    internal class UserServicse : IUserService
+    public class UserServicse : IUserService
     {
         readonly IRepository<User> _userRepository;
+        public UserServicse(IRepository<User> repository)
+        {
+            _userRepository = repository;
+        }
         public bool Add(User user)
         {
             if (user == null) { return false; }

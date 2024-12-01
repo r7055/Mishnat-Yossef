@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MIshnat_Yossef.Service.Service
 {
-    internal class StationServicse : IStationService
+    public class StationServicse : IStationService
     {
         readonly IRepository<Station> _stationRepository;
         public StationServicse(IRepository<Station> repository)
