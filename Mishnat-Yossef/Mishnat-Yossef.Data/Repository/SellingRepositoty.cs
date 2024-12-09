@@ -11,40 +11,61 @@ namespace Mishnat_Yossef.Data.Repository
 {
     public class SellingRepositoty : IRepository<Selling>
     {
-        readonly IdataContext _dataContext;
-        public SellingRepositoty(IdataContext idataContext)
+        readonly DataContext _dataContext;
+        public SellingRepositoty(DataContext idataContext)
         {
             _dataContext = idataContext;
         }
         public bool Add(Selling selling)
         {
-            _dataContext.Sellings.Add(selling);
-            return _dataContext.SaveDada(_dataContext.Sellings);
+            try
+            {
+                _dataContext.Sellings.Add(selling);
+                _dataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
-            return _dataContext.Sellings.Remove(_dataContext.Sellings.Find(s => s.SellingId == id)) &&
-                _dataContext.SaveDada(_dataContext.Sellings);
+            try
+            {
+                _dataContext.Sellings.Remove(Get(id));
+                _dataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public Selling Get(string id)
+        public Selling Get(int id)
         {
-            return _dataContext.Sellings.Find(s => s.SellingId == id);
+            return _dataContext.Sellings.Find(id);
         }
         public List<Selling> GetAll()
         {
-            return _dataContext.Sellings;
+            return _dataContext.Sellings.ToList();
         }
-        public bool Update(string id, Selling selling)
+        public bool Update(int id, Selling selling)
         {
-            Selling s=_dataContext.Sellings.Find(s=>s.SellingId==id);
-            if (s!=null)
+            Selling s = _dataContext.Sellings.Find(id);
+            if (s == null) return false; try
             {
-                s.Parasha = selling.Parasha;
-                s.Products = selling.Products;
-                s.Date = s.Date;
-                return _dataContext.SaveDada(_dataContext.Sellings);
+                s.Parasha = selling.Parasha == null ? s.Parasha : selling.Parasha;
+                s.Products = selling.Products == null ? s.Products : selling.Products;
+                s.Date = s.Date == null ? s.Date : selling.Date;
+                _dataContext.SaveChanges();
+                return true;
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

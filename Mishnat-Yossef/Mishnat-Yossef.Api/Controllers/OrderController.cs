@@ -25,7 +25,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
-        public ActionResult<Order> GetOrderById(string id)
+        public ActionResult<Order> GetOrderById(int id)
         {
             if (id == null) return BadRequest();
             var result = _orderService.Get(id);
@@ -43,7 +43,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // PUT api/<OrderController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> UpdateOrder(string id, [FromBody] Order order)
+        public ActionResult<bool> UpdateOrder(int id, [FromBody] Order order)
         {
             if (id == null) return BadRequest();
             bool res = _orderService.Update(id, order);
@@ -53,7 +53,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // DELETE api/<OrderController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteOrder(string id)
+        public ActionResult<bool> DeleteOrder(int id)
         {
             if (id == null) return BadRequest();
             bool res = _orderService.Delete(id);

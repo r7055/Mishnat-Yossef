@@ -23,13 +23,13 @@ namespace MIshnat_Yossef.Service.Service
            return _userRepository.Add(user);
         }
 
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
            if(id == null) { return false; }
            return _userRepository.Delete(id);
         }
 
-        public User Get(string id)
+        public User Get(int id)
         {
             return _userRepository.Get(id);
         }
@@ -39,7 +39,7 @@ namespace MIshnat_Yossef.Service.Service
             return _userRepository.GetAll();
         }
 
-        public bool Update(string id, User user)
+        public bool Update(int id, User user)
         {
            if(user == null) { return false; }
            return (_userRepository.Update(id, user));

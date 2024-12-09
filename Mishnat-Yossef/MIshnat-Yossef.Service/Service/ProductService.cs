@@ -22,12 +22,12 @@ namespace MIshnat_Yossef.Service.Service
            return _productRepository.Add(product);
         }
 
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
             return _productRepository.Delete(id);
         }
 
-        public Product Get(string id)
+        public Product Get(int id)
         {
            return _productRepository.Get(id);
         }
@@ -37,7 +37,7 @@ namespace MIshnat_Yossef.Service.Service
            return _productRepository.GetAll();
         }
 
-        public bool Update(string id, Product product)
+        public bool Update(int id, Product product)
         {
            return _productRepository.Update(id, product);
         }

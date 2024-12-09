@@ -13,41 +13,62 @@ namespace Mishnat_Yossef.Data.Repository
 {
     public class StationRepository : IRepository<Station>
     {
-        readonly IdataContext _idataContext;
-        public StationRepository(IdataContext idataContext)
+        readonly DataContext _idataContext;
+        public StationRepository(DataContext idataContext)
         {
             _idataContext = idataContext;
         }
         public bool Add(Station station)
         {
-            _idataContext.Stations.Add(station);
-            return _idataContext.SaveDada(_idataContext.Stations);
+            try
+            {
+                _idataContext.Stations.Add(station);
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
-           return _idataContext.Stations.Remove(_idataContext.Stations.Find(s=>s.StationId == id))&&
-           _idataContext.SaveDada(_idataContext.Stations);
+            try
+            {
+                _idataContext.Stations.Remove(Get(id));
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public Station Get(string id)
+        public Station Get(int id)
         {
-            return _idataContext.Stations.Find(s=>s.StationId==id);
+            return _idataContext.Stations.Find(id);
         }
         public List<Station> GetAll()
         {
-           return _idataContext.Stations;
+            return _idataContext.Stations.ToList();
         }
-        public bool Update(string id, Station station)
+        public bool Update(int id, Station station)
         {
-            Station s = _idataContext.Stations.Find(s => s.StationId == id);
-            if (s != null)
+            Station s = _idataContext.Stations.Find(id);
+            if (s == null) return false;
+            try
             {
-                s.Address = station.Address;
-                s.Manager = station.Manager;
-                s.Name = station.Name;
-                s.Time = station.Time;
-                return _idataContext.SaveDada(_idataContext.Stations);
+                s.Address = station.Address == null ? s.Address : station.Address;
+                s.Manager = station.Manager == null ? s.Manager : station.Manager;
+                s.Name = station.Name == null ? s.Name : station.Name;
+                s.Time = station.Time == null ? s.Time : station.Time;
+                _idataContext.SaveChanges();
+                return true;
             }
-            return false;
+            catch (Exception ex) { return false; }
         }
+
     }
 }
+

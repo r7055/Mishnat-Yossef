@@ -10,41 +10,64 @@ namespace Mishnat_Yossef.Data.Repository
 {
     public class ProductRepository : IRepository<Product>
     {
-        readonly IdataContext _idataContext;
-        public ProductRepository(IdataContext idataContext)
+        readonly DataContext _idataContext;
+        public ProductRepository(DataContext idataContext)
         {
             _idataContext = idataContext;
         }
         public bool Add(Product product)
         {
-           _idataContext.Products.Add(product);
-            return _idataContext.SaveDada(_idataContext.Products);
+            try
+            {
+                _idataContext.Products.Add(product);
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
-            return _idataContext.Products.Remove(_idataContext.Products.First(p => p.ProductId == id)) &&
-                _idataContext.SaveDada(_idataContext.Products);
+            try
+            {
+                _idataContext.Products.Remove(Get(id));
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public Product Get(string id)
+        public Product Get(int id)
         {
-            return _idataContext.Products.Find(p => p.ProductId == id);
+            return _idataContext.Products.Find(id);
         }
         public List<Product> GetAll()
         {
-            return _idataContext.Products;
+            return _idataContext.Products.ToList();
         }
-        public bool Update(string id, Product product)
+        public bool Update(int id, Product product)
         {
-           Product p=_idataContext.Products.Find(p=>p.ProductId == id);
-            if (p != null)
+            Product p = _idataContext.Products.Find(id);
+
+            if (p == null) return false;
+            try
             {
-                p.DateOfLastUpdate = product.DateOfLastUpdate;
-                p.Qty = product.Qty;
-                p.Price = product.Price;
-                p.Name = product.Name;
-                return _idataContext.SaveDada(_idataContext.Products);
+                p.DateOfLastUpdate = product.DateOfLastUpdate == null ? p.DateOfLastUpdate : product.DateOfLastUpdate; ;
+                p.Qty = product.Qty == null ? p.Qty : product.Qty;
+                p.Price = product.Price == null ? p.Price : product.Price;
+                p.Name = product.Name == null ? p.Name : product.Name;
+                _idataContext.SaveChanges();
+                return true;
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

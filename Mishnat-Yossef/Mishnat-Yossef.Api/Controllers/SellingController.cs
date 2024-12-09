@@ -24,7 +24,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // GET api/<SellingController>/5
         [HttpGet("{id}")]
-        public ActionResult<Selling> GetSellingById(string sellingId)
+        public ActionResult<Selling> GetSellingById(int sellingId)
         {
             if (sellingId == null) return BadRequest();
             var result = _sellingService.Get(sellingId);
@@ -42,7 +42,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // PUT api/<SellingController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> UpdateSelling(string sellingId, [FromBody] Selling selling)
+        public ActionResult<bool> UpdateSelling(int sellingId, [FromBody] Selling selling)
         {
             if (sellingId ==null) return BadRequest();
             return _sellingService.Update(sellingId, selling);
@@ -50,7 +50,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // DELETE api/<SellingController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteSelling(string sellingId)
+        public ActionResult<bool> DeleteSelling(int sellingId)
         {
             if (sellingId == null) return BadRequest();
             return _sellingService.Delete(sellingId);

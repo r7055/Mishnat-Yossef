@@ -22,13 +22,13 @@ namespace MIshnat_Yossef.Service.Service
            return _SellingRepository.Add(selling);
         }
 
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
             if (id == null) return false;
             return _SellingRepository.Delete(id);
         }
 
-        public Selling Get(string id)
+        public Selling Get(int id)
         {
             return _SellingRepository.Get(id);
         }
@@ -38,7 +38,7 @@ namespace MIshnat_Yossef.Service.Service
             return _SellingRepository.GetAll();
         }
 
-        public bool Update(string id, Selling selling)
+        public bool Update(int id, Selling selling)
         {
            if(id == null) return false;
            return _SellingRepository.Update(id, selling);

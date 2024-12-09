@@ -23,13 +23,13 @@ namespace MIshnat_Yossef.Service.Service
            return _OrderRepository.Add(order);
         }
 
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
             if(id==null) { return false; }
             return _OrderRepository.Delete(id);
         }
 
-        public Order Get(string id)
+        public Order Get(int id)
         {
             return _OrderRepository.Get(id);
         }
@@ -39,7 +39,7 @@ namespace MIshnat_Yossef.Service.Service
             return _OrderRepository.GetAll();
         }
 
-        public bool Update(string id, Order order)
+        public bool Update(int id, Order order)
         {
            return _OrderRepository.Update(id, order);
         }

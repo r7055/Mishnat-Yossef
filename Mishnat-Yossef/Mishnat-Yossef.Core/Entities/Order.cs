@@ -1,10 +1,15 @@
 ﻿
 
- namespace Mishnat_Yossef.Core.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Mishnat_Yossef.Core.Entities
 {
+    [Table("Orders")]
     public class Order
     {
-        public string OrderId { get; set; }
+        [Key]
+        public int OrderId { get; set; }
         public int Payment { get; set; }
         public int UserId { get; set; }
         public DateTime DateOrder { get; set; }

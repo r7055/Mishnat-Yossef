@@ -25,7 +25,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public ActionResult<Product> GetById(string id)
+        public ActionResult<Product> GetById(int id)
         {
             if (id == null) return BadRequest();
             var result = _productService.Get(id);
@@ -43,7 +43,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Put(string id, [FromBody] Product product)
+        public ActionResult<bool> Put(int id, [FromBody] Product product)
         {
             if (id == null) return BadRequest();
             return _productService.Update(id, product);
@@ -51,7 +51,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteProduct(string id)
+        public ActionResult<bool> DeleteProduct(int id)
         {
             if (id == null) return BadRequest();
             return _productService.Delete(id);

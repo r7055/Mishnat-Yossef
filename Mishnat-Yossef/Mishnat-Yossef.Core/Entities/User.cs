@@ -1,8 +1,13 @@
-﻿namespace Mishnat_Yossef.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Mishnat_Yossef.Core.Entities
 {
+    [Table("Users")]
     public class User
     {
-        public string UserId { get; set; } 
+        [Key]
+        public int UserId { get; set; } 
         public string Name { get; set; } 
         public string Tz { get; set; } 
         public string Email { get; set; }

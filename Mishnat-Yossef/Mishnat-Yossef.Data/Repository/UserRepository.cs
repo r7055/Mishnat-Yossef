@@ -11,44 +11,65 @@ namespace Mishnat_Yossef.Data.Repository
 {
     public class UserRepository : IRepository<User>
     {
-        readonly IdataContext _idataContext;
-        public UserRepository(IdataContext idataContext)
+        readonly DataContext _idataContext;
+        public UserRepository(DataContext idataContext)
         {
             _idataContext = idataContext;
         }
         public bool Add(User user)
         {
-           _idataContext.Users.Add(user);
-            return _idataContext.SaveDada<User>(_idataContext.Users);
+            try
+            {
+                _idataContext.Users.Add(user);
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
-            return _idataContext.Users.Remove(_idataContext.Users.Find((user)=>user.UserId==id))&&
-            _idataContext.SaveDada(_idataContext.Users);
+            try
+            {
+                _idataContext.Users.Remove(Get(id));
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-        public User Get(string id)
+        public User Get(int id)
         {
-           return _idataContext.Users.Find(user=>user.UserId==id);
+            return _idataContext.Users.Find(id);
         }
         public List<User> GetAll()
         {
-           return _idataContext.Users;
+            return _idataContext.Users.ToList();
         }
-        public bool Update(string id, User user)
+        public bool Update(int id, User user)
         {
-            User u=_idataContext.Users.Find(user=>user.UserId==id);
-            if (u!=null)
+            User u = _idataContext.Users.Find(id);
+            if (u == null) return false;
+            try
             {
-                u.Tz = user.Tz;
-                u.Address = user.Address;
-                u.Email = user.Email;
-                u.DateOfRegistration = user.DateOfRegistration;
-                u.Email = user.Email;
-                u.Name = user.Name;
-                u.Phon = user.Phon;
-                return _idataContext.SaveDada(_idataContext.Users);
+                u.Tz = user.Tz == null ? u.Tz : user.Tz;
+                u.Address = user.Address == null ? u.Address : user.Address;
+                u.Email = user.Email == null ? u.Email : user.Email;
+                u.DateOfRegistration = user.DateOfRegistration == null ? u.DateOfRegistration : user.DateOfRegistration;
+                u.Name = user.Name == null ? u.Name : user.Name;
+                u.Phon = user.Phon == null ? u.Phon : user.Phon;
+                _idataContext.SaveChanges();
+                return true;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
     }
 }

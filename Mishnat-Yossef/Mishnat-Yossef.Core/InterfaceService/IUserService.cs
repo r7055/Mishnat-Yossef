@@ -10,9 +10,9 @@ namespace Mishnat_Yossef.Core.InterfaceService
     public interface IUserService
     {
         public List<User> GetAll();
-        public User Get(string id);
+        public User Get(int id);
         public bool Add(User user);
-        public bool Update(string id, User user);
-        public bool Delete(string id);
+        public bool Update(int id, User user);
+        public bool Delete(int id);
     }
 }

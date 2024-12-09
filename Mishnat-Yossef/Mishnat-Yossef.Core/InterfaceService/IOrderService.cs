@@ -11,9 +11,9 @@ namespace Mishnat_Yossef.Core.InterfaceService
     public interface IOrderService
     {
         public List<Order> GetAll();
-        public Order Get(string id);
+        public Order Get(int id);
         public bool Add(Order order);
-        public bool Update(string id, Order order);
-        public bool Delete(string id);
+        public bool Update(int id, Order order);
+        public bool Delete(int id);
     }
 }

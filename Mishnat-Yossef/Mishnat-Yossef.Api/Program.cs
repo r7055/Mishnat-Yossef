@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Mishnat_Yossef.Core.Entities;
 using Mishnat_Yossef.Core.InterfaceRepository;
 using Mishnat_Yossef.Core.InterfaceService;
@@ -9,8 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddSingleton<IdataContext, DataContext>();
-
+//builder.Services.AddSingleton<IdataContext, DataContext>();
+builder.Services.AddDbContext< DataContext>(option =>
+{
+    option.UseSqlServer("Data Source = sqlsrv; Initial Catalog = Mishnat-Yossef; Integrated Security = true; ");
+    //  "User ID = shuli; Password = 1234; TrustServerCertificate = True; Encrypt = False");
+});
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserServicse>();

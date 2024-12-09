@@ -1,11 +1,16 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Mishnat_Yossef.Core.Entities
 {
+    [Table("Sellings")]
     public class Selling
     {
-        public string SellingId { get; set; }
+        [Key]
+        public int SellingId { get; set; }
         public List<Product> Products { get; set; }
         public string Parasha { get; set; }
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

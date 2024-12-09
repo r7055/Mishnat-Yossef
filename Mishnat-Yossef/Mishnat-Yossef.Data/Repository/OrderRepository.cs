@@ -11,41 +11,62 @@ namespace Mishnat_Yossef.Data.Repository
 {
     public class OrderRepository : IRepository<Order>
     {
-        readonly IdataContext _idataContext;
-        public OrderRepository(IdataContext idataContext)
+        readonly DataContext _idataContext;
+        public OrderRepository(DataContext idataContext)
         {
             _idataContext = idataContext;
         }
         public bool Add(Order order)
         {
-            _idataContext.Orders.Add(order);
-            return _idataContext.SaveDada(_idataContext.Orders);
+            try
+            {
+                _idataContext.Orders.Add(order);
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
-            return _idataContext.Orders.Remove(_idataContext.Orders.Find(o => o.OrderId == id)) &&
-                 _idataContext.SaveDada(_idataContext.Orders);
+            try
+            {
+                _idataContext.Orders.Remove(Get(id));
+                _idataContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public Order Get(string id)
+        public Order Get(int id)
         {
-            return _idataContext.Orders.Find(o => o.OrderId == id);
+            return _idataContext.Orders.Find(id);
         }
         public List<Order> GetAll()
         {
-            return _idataContext.Orders;
+            return _idataContext.Orders.ToList();
         }
-        public bool Update(string id, Order order)
+        public bool Update(int id, Order order)
         {
-           Order o=_idataContext.Orders.Find(o=>o.OrderId == id);
-            if (o != null)
+            Order o = _idataContext.Orders.Find(id);
+            if (o == null) return false;
+            try
             {
-                o.DateOrder = order.DateOrder;
-                o.StationId = order.StationId;
-                o.Payment = order.Payment;
-                o.SellingId = order.SellingId;
-                return _idataContext.SaveDada(_idataContext.Orders);
+                o.DateOrder = order.DateOrder == null ? o.DateOrder : order.DateOrder;
+                o.Payment = order.Payment == null ? o.Payment : order.Payment;
+                o.SellingId = order.SellingId == null ? o.SellingId : order.SellingId;
+                _idataContext.SaveChanges();
+                return true;
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

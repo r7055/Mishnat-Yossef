@@ -10,9 +10,9 @@ namespace Mishnat_Yossef.Core.InterfaceRepository
     public interface IRepository<T>
     {
         public List<T> GetAll();
-        public T Get(string id);
+        public T Get(int id);
         public bool Add(T repository);
-        public bool Update(string id,T repository);
-        public bool Delete(string id);
+        public bool Update(int id,T repository);
+        public bool Delete(int id);
     }
 }

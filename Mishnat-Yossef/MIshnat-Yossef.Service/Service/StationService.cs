@@ -22,12 +22,12 @@ namespace MIshnat_Yossef.Service.Service
             return _stationRepository.Add(station);
         }
 
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
             return _stationRepository.Delete(id);
         }
 
-        public Station Get(string id)
+        public Station Get(int id)
         {
             return _stationRepository.Get(id); 
         }
@@ -38,7 +38,7 @@ namespace MIshnat_Yossef.Service.Service
            return _stationRepository.GetAll();
         }
 
-        public bool Update(string id, Station station)
+        public bool Update(int id, Station station)
         {
            if(station  == null) { return false; }   
            return _stationRepository.Update(id, station);

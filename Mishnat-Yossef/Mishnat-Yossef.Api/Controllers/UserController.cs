@@ -27,7 +27,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public ActionResult<User> GetById(string id)
+        public ActionResult<User> GetById(int id)
         {
             if (id == null)
                 return BadRequest();
@@ -47,7 +47,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> Update(string id, [FromBody] User user)
+        public ActionResult<bool> Update(int id, [FromBody] User user)
         {
             if (user == null||id==null) return BadRequest();
             return _userService.Update(id,user);
@@ -55,7 +55,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> Delete(string id)
+        public ActionResult<bool> Delete(int id)
         {
             if (id == null)
                 return BadRequest();

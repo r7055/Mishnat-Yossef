@@ -25,7 +25,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // GET api/<StationController>/5
         [HttpGet("{id}")]
-        public ActionResult<Station> GetStationById(string stationId)
+        public ActionResult<Station> GetStationById(int stationId)
         {
             if (stationId == null)
                 return BadRequest();
@@ -44,7 +44,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // PUT api/<StationController>/5
         [HttpPut("{id}")]
-        public ActionResult<bool> UpdateStation(string id, [FromBody] Station station)
+        public ActionResult<bool> UpdateStation(int id, [FromBody] Station station)
         {
             if (id == null) return BadRequest();
             return _stationService.Update(id, station);
@@ -52,7 +52,7 @@ namespace Mishnat_Yossef.Api.Controllers
 
         // DELETE api/<StationController>/5
         [HttpDelete("{id}")]
-        public ActionResult<bool> DeleteStation(string id)
+        public ActionResult<bool> DeleteStation(int id)
         {
             if (id == null)
                 return BadRequest();

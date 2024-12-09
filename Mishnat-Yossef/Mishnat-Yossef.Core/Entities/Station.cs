@@ -1,8 +1,13 @@
-﻿namespace Mishnat_Yossef.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Mishnat_Yossef.Core.Entities
 {
+    [Table("Stations")]
     public class Station
     {
-        public string StationId { get; set; }
+        [Key]
+        public int StationId { get; set; }
         public string Manager { get; set; }
         public string Name { get; set; }
         public int SellingId { get; set; }
