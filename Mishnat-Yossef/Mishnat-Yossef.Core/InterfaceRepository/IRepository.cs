@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mishnat_Yossef.Core.InterfaceRepository
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
         public List<T> GetAll();
         public T Get(int id);
