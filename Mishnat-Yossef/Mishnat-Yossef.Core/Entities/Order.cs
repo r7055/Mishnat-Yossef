@@ -15,5 +15,9 @@ namespace Mishnat_Yossef.Core.Entities
         public DateTime DateOrder { get; set; }
         public string  StationId { get; set; }
         public string SellingId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public User User { get; set; }
+        List<LineOrder> LineOrders { get; set; }
+
     }
 }
