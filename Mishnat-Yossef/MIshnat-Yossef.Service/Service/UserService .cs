@@ -12,37 +12,37 @@ namespace MIshnat_Yossef.Service.Service
 {
     public class UserServicse : IUserService
     {
-        readonly IRepository<User> _userRepository;
-        public UserServicse(IRepository<User> repository)
+        readonly IRepositoryManager _repositoryManager;
+        public UserServicse(IRepositoryManager repositoryManager)
         {
-            _userRepository = repository;
+            _repositoryManager = repositoryManager;
         }
         public bool Add(User user)
         {
             if (user == null) { return false; }
-           return _userRepository.Add(user);
+           return _repositoryManager._userRepository.Add(user);
         }
 
         public bool Delete(int id)
         {
            if(id == null) { return false; }
-           return _userRepository.Delete(id);
+           return _repositoryManager._userRepository.Delete(id);
         }
 
         public User Get(int id)
         {
-            return _userRepository.Get(id);
+            return _repositoryManager._userRepository.Get(id);
         }
 
-        public List<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
-            return _userRepository.GetAll();
+            return _repositoryManager._userRepository.GetAll();
         }
 
         public bool Update(int id, User user)
         {
            if(user == null) { return false; }
-           return (_userRepository.Update(id, user));
+           return (_repositoryManager._userRepository.Update(id, user));
         }
     }
 

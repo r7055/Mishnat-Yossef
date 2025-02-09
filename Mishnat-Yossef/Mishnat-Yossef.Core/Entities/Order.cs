@@ -17,7 +17,7 @@ namespace Mishnat_Yossef.Core.Entities
         public string SellingId { get; set; }
         [ForeignKey(nameof(UserId))]
         public User User { get; set; }
-        List<LineOrder> LineOrders { get; set; }
+        List<LineOrder> OrderProdcts { get; set; }
 
     }
 }

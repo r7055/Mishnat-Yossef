@@ -11,37 +11,37 @@ namespace MIshnat_Yossef.Service.Service
 {
     public class OrderService : IOrderService
     {
-        readonly IRepository<Order> _OrderRepository;
-        public OrderService(IRepository<Order> repository)
+        readonly IRepositoryManager _repositoryManager;
+        public OrderService(IRepositoryManager repositoryManager)
         {
-            _OrderRepository = repository;
+            _repositoryManager = repositoryManager;
         }
 
         public bool Add(Order order)
         {
            if(order == null) { return false; } 
-           return _OrderRepository.Add(order);
+           return _repositoryManager._orderRepository.Add(order);
         }
 
         public bool Delete(int id)
         {
             if(id==null) { return false; }
-            return _OrderRepository.Delete(id);
+            return _repositoryManager._orderRepository.Delete(id);
         }
 
         public Order Get(int id)
         {
-            return _OrderRepository.Get(id);
+            return _repositoryManager._orderRepository.Get(id);
         }
 
-        public List<Order> GetAll()
+        public IEnumerable<Order> GetAll()
         {
-            return _OrderRepository.GetAll();
+            return _repositoryManager._orderRepository.GetAll();
         }
 
         public bool Update(int id, Order order)
         {
-           return _OrderRepository.Update(id, order);
+           return _repositoryManager._orderRepository.Update(id, order);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Mishnat_Yossef.Core.InterfaceService
 {
     public interface IOrderService
     {
-        public List<Order> GetAll();
+        public IEnumerable<Order> GetAll();
         public Order Get(int id);
         public bool Add(Order order);
         public bool Update(int id, Order order);

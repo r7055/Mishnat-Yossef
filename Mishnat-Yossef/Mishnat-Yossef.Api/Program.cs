@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using mishnat_yossef.data.repository;
 using Mishnat_Yossef.Core.Entities;
 using Mishnat_Yossef.Core.InterfaceRepository;
 using Mishnat_Yossef.Core.InterfaceService;
@@ -21,7 +22,7 @@ builder.Services.AddScoped<IUserService, UserServicse>();
 builder.Services.AddScoped<ISellingService, SellingServicse>();
 builder.Services.AddScoped<IStationService, StationServicse>();
 
-builder.Services.AddScoped<IRepository<User>, Repository<User>();
+builder.Services.AddScoped<IRepository<,Repository<T>>, Repository();
 builder.Services.AddScoped<IRepository<Order>, OrderRepository>();
 builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
 builder.Services.AddScoped<IRepository<Selling>, SellingRepositoty>();

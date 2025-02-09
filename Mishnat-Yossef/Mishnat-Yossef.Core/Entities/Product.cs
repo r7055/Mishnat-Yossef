@@ -19,6 +19,7 @@ namespace Mishnat_Yossef.Core.Entities
         public bool IsCold { get; set; }
         public DateTime DateOfLastUpdate { get; set; }
         public int Qty { get; set; }
+
         
     }
 }

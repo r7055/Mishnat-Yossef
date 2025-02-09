@@ -24,7 +24,7 @@ namespace mishnat_yossef.data.repository
             try
             {
                 _dbSet.Add(entity);
-                _dbSet.SaveChanges();
+                //_dbSet.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace mishnat_yossef.data.repository
             try
             {
                 _dbSet.Remove(Get(id));
-                _dbSet.SaveChanges();
+                //_dbSet.SaveChanges();
                 return true;
             }
             catch (Exception ex)
@@ -73,7 +73,7 @@ namespace mishnat_yossef.data.repository
                         }
                     }
                 }
-                _dbSet.SaveChanges();
+                //_dbSet.SaveChanges();
                 return true;
             }
             catch (Exception ex)

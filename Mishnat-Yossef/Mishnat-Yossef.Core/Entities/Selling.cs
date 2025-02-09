@@ -11,6 +11,6 @@ namespace Mishnat_Yossef.Core.Entities
         public int SellingId { get; set; }
         public List<Product> Products { get; set; }
         public string Parasha { get; set; }
-        public DateTime Date { get; set; }
+      
     }
 }

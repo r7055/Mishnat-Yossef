@@ -9,7 +9,7 @@ namespace Mishnat_Yossef.Core.InterfaceService
 {
     public interface ISellingService
     {
-        public List<Selling> GetAll();
+        public IEnumerable<Selling> GetAll();
         public Selling Get(int id);
         public bool Add(Selling selling);
         public bool Update(int id, Selling selling);
